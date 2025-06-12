@@ -8,12 +8,12 @@ import { redirect } from "next/navigation";
 const PER_PAGE = 18;
 
 type CountriesByRegionProps = {
-     region: string
-}
+    key: string, 
+    region: string
+ }
 
-const CountriesByRegion = ({ region } : CountriesByRegionProps) => {
+const CountriesByRegion = ({ key, region } : CountriesByRegionProps) => {
   const [countries, setCountries] = useState([]);
-  const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [currentPage, setCurrentPage] = useState(1);
   
@@ -32,15 +32,14 @@ const CountriesByRegion = ({ region } : CountriesByRegionProps) => {
   useEffect(() => {
     const fetchCountries = async () => {
       try {
-        setLoading(true);
-        const response = await axios.get(
+       const response = await axios.get(
           `${process.env.NEXT_PUBLIC_API_URL}/v3.1/region/${region}`
         );
         setCountries(response.data);
       } catch (err) {
-        setError("Error al obtener los datos.");
+        setError(`Error al obtener los datos." ${err}`);
       } finally {
-        setLoading(false);
+  
       }
     };
    
@@ -64,7 +63,7 @@ const CountriesByRegion = ({ region } : CountriesByRegionProps) => {
   return (
     <div>
         <div className="w-full max-w-9/10 justify-self-center flex justify-center p-3">
-          <p className="text-sky-600 text-3xl" >Paises de {region === 'Europe' ? 'Europa': region === 'Americas' ? 'América' : region === 'Antarctic' ? 'Antártida' :region} </p>
+          <p key={key} className="text-sky-600 text-3xl" >Paises de {region === 'Europe' ? 'Europa': region === 'Americas' ? 'América' : region === 'Antarctic' ? 'Antártida' :region} </p>
           
         </div>
         <div className="w-full max-w-9/10 justify-self-center flex justify-center p-3">
