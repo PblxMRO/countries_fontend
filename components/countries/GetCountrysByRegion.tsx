@@ -89,7 +89,7 @@ const CountriesByRegion = ({ key, region } : CountriesByRegionProps) => {
               </button>
            )}
            {pages.map(currentPaginationPage =>(
-            <button type="button" className={`${currentPage === currentPaginationPage && 'font-black bg-gray-100'} px-4 py-2 text-sm text-gray-900 ring-1 ring-inset ring-gray-300 focus:z-20 focus:outline-offset-0`}
+            <button type="button" key={currentPaginationPage} className={`${currentPage === currentPaginationPage && 'font-black bg-gray-100'} px-4 py-2 text-sm text-gray-900 ring-1 ring-inset ring-gray-300 focus:z-20 focus:outline-offset-0`}
                onClick={() => setCurrentPage(currentPaginationPage)} 
             >{currentPaginationPage}</button>
            ))}
